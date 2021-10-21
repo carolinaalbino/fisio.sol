@@ -1,0 +1,30 @@
+pragma solidity 0.8.9;
+
+contract Fisioterapia 
+{
+    string NomePaciente;
+    uint QuantidadeDeSessoes;
+    uint ValorDeCadaSessao;
+    uint ValorTotal;
+    
+    constructor (string memory _nomepaciente, uint _quantidadedesessoes, uint _valordecadasessao)
+    {
+        NomePaciente = _nomepaciente;
+        QuantidadeDeSessoes = _quantidadedesessoes;
+        ValorDeCadaSessao = _valordecadasessao;
+        ValorTotal = calculavalortotal();
+    }
+    
+    function calculavalortotal() public view returns (uint)
+    {
+        
+        uint _ValorTotal = (QuantidadeDeSessoes / ((ValorDeCadaSessao * ValorDeCadaSessao) / 100));
+        return(_ValorTotal);
+    }
+    
+    function alteravalordecadasessao(uint _valordecadasessao) public returns (string memory, uint, uint){
+        
+        ValorDeCadaSessao = _valordecadasessao;
+        ValorTotal = calculavalortotal();
+        return ("O Valor da Sessao atual e se Valor Total sao:", ValorDeCadaSessao, ValorTotal);}
+} 
